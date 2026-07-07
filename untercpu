@@ -1,0 +1,31 @@
+#!/usr/bin/env lua
+
+local command = arg[1]
+
+if command == "help" then
+    print("UnterCPU CLI")
+    print("")
+    print("Available Commands:")
+    print("help - Outputs this.")
+    print("run - Runs main.uasm.")
+    print("disasm - Disassembles main.uasm.")
+    print("build - Builds main.uasm to main.ucpu.")
+    print("start - Builds and runs main.uasm.")
+elseif command == "build" then
+    require("build").run(arg[2])
+
+elseif command == "run" then
+    require("run").run(arg[2])
+
+elseif command == "start" then
+    require("build").run(arg[2])
+
+    local output = arg[2]:gsub("%.uasm$", ".ucpu")
+    require("run").run(output)
+
+elseif command == "disasm" then
+    require("disasm").run(arg[2])
+
+else
+    print("Unknown command.")
+end
