@@ -1,6 +1,6 @@
 local cpu = {}
 
-dump_registers = 0 -- SET TS TO ONE TO ENABLE DUMP MODE
+dump_registers = 0
 dump_memory = 1
 
 function cpu.dump_registers(registers)
