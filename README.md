@@ -51,7 +51,7 @@ chmod -x untercpu
 build an assembly program:
 
 ```bash
-untercpu build main.uasm
+./untercpu build main.uasm
 ```
 
 the compiled program will be saved as:
@@ -63,19 +63,19 @@ ucpu/main.ucpu
 run a compiled program:
 
 ```bash
-untercpu run main
+./untercpu run main
 ```
 
 build and immediately run a program:
 
 ```bash
-untercpu start main.uasm
+./untercpu start main.uasm
 ```
 
 display help:
 
 ```bash
-untercpu help
+./untercpu help
 ```
 
 ## example
@@ -95,13 +95,13 @@ HALT
 build:
 
 ```bash
-untercpu build hello.uasm
+./untercpu build hello.uasm
 ```
 
 run:
 
 ```bash
-untercpu run hello
+./untercpu run hello
 ```
 
 Output:
