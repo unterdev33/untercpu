@@ -175,6 +175,7 @@ MOV R0 72
 | 16 | LOAD | load memory value into register |
 | 17 | CMP | compare two registers (result stored in `R3`) |
 | 18 | DEBUG | print register value (debug instruction) |
+| 19 | PLOCATE | outputs the current pointer position (debug instruction) |
 
 ## limitations
 
