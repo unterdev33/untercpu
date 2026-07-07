@@ -1,7 +1,7 @@
 local cpu = {}
 
 dump_registers = 0
-dump_memory = 1
+dump_memory = 0
 
 function cpu.dump_registers(registers)
 
