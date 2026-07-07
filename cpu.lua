@@ -1,6 +1,7 @@
 local cpu = {}
 
-dump_mode = 0 -- SET TS TO ONE TO ENABLE DUMP MODE
+dump_registers = 0 -- SET TS TO ONE TO ENABLE DUMP MODE
+dump_memory = 1
 
 function cpu.dump_registers(registers)
 
@@ -11,6 +12,17 @@ function cpu.dump_registers(registers)
     end
 
 end
+
+function cpu.dump_memory(memory)
+
+    print("\nMEMORY")
+
+    for i = 0,255 do
+        print("M"..i.." =", memory[i])
+    end
+
+end
+
 
 function cpu.run(memory)
 
@@ -125,13 +137,21 @@ function cpu.run(memory)
         elseif opcode == 18 then -- DEBUG
             io.write(registers[arg1])
             pc = pc + 3
+
+        elseif opcode == 19 then -- PLOCATE
+            io.write("\nPOINTER POSITION: ", pc, "\n")
+            pc = pc + 3
+
         else
             print("\n\nCRITICAL ERROR!!!\nUnknown opcode " .. tostring(opcode) .. " at address " .. pc)
             os.exit()
         end
-
-    if dump_mode == 1 then
+    if dump_registers == 1 then
         cpu.dump_registers(registers)
+    end
+
+    if dump_memory == 1 then
+        cpu.dump_memory(memory)
     end
 
     end

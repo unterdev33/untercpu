@@ -18,7 +18,8 @@ local opcode = {
     STORE = 15,
     LOAD = 16,
     CMP = 17,
-    DEBUG = 18
+    DEBUG = 18,
+    PLOCATE = 19
 }
 
 local function get_source_lines(path)
@@ -56,6 +57,10 @@ function build.run(input)
         local cmd = {}
 
         for token in line:gmatch("%S+") do
+
+            if token == "PLOCATE" then
+                print("WARNING!\nPLOCATE is a debugging instruction. It is not part of the processor architecture and should not be used in release programs.")
+            end
 
             if token == "DEBUG" then
                 print("WARNING!\n\nDEBUG is a debugging instruction. It is not part of the processor architecture and should not be used in release programs.")
