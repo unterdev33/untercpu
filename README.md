@@ -151,31 +151,9 @@ is equivalent to:
 MOV R0 72
 ```
 
-## instruction set
+## instruction set and memory
 
-**ISA available on google sheets:** https://docs.google.com/spreadsheets/d1mtu_ajOosjGi8C20cFWCVu4Y1kvMKEs9cEdgPnMOWeI/
-
-| Opcode | Mnemonic | Description |
-|--------:|----------|-------------|
-| 1 | HALT | halts cpu |
-| 2 | MOV | write the immediate value to the register (reg). |
-| 3 | ADD | addition of the values ​​in registers R1 and R2, with the result stored in R1. |
-| 4 | SUB | substraction of the values ​​in registers R1 and R2, with the result stored in R1. |
-| 5 | JMP | unconditional jump. |
-| 6 | JNZ | jump to address if the specified register is not zero. |
-| 7 | PRINT | print the ascii character whose code is stored in the register. |
-| 8 | XOR | bitwise xor of R1 and R2. the result is stored in R1. |
-| 9 | SHL | shift the value in reg left by the specified number of bits. |
-| 10 | SHR | shift the value in reg right by the specified number of bits. |
-| 11 | MUL | multiply R1 by R2. the result is stored in R1. |
-| 12 | DIV | divide R1 by R2. the result is stored in R1. |
-| 13 | JIP | jump if positive |
-| 14 | JIN | jump if negative |
-| 15 | STORE | store register value into memory |
-| 16 | LOAD | load memory value into register |
-| 17 | CMP | compare two registers (result stored in `R3`) |
-| 18 | DEBUG | print register value (debug instruction) |
-| 19 | PLOCATE | outputs the current pointer position (debug instruction) |
+**ISA and memory available on google sheets:** https://docs.google.com/spreadsheets/d1mtu_ajOosjGi8C20cFWCVu4Y1kvMKEs9cEdgPnMOWeI/
 
 ## limitations
 
