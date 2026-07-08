@@ -25,13 +25,18 @@ end
 
 
 function cpu.run(memory)
+    math.randomseed(os.time())
 
     local registers = {}
 
     for i = 0, 3 do
         registers[i] = 0
     end
+    
+    local STACK_BOTTOM = 200
+    local STACK_TOP = 249
 
+    local sp = STACK_TOP
     local pc = 0
     local running = true
 
@@ -114,10 +119,22 @@ function cpu.run(memory)
             end
 
         elseif opcode == 15 then -- STORE
-            memory[arg2] = registers[arg1]
-            pc = pc + 3
+            if arg2 == 251 then
+                io.write(string.char(registers[arg1]))
+            else
+                memory[arg2] = registers[arg1]
+                pc = pc + 3
+            end
 
         elseif opcode == 16 then -- LOAD
+            if arg2 == 250 then
+                io.write("")
+                memory[250] = tonumber(io.read())
+
+            elseif arg2 == 252 then
+                memory[252] = math.random(0, 255)
+            end
+
             registers[arg1] = memory[arg2]
             pc = pc + 3
 
@@ -141,6 +158,41 @@ function cpu.run(memory)
         elseif opcode == 19 then -- PLOCATE
             io.write("\nPOINTER POSITION: ", pc, "\n")
             pc = pc + 3
+
+        elseif opcode == 20 then -- MOD
+            registers[arg1] = registers[arg1] % registers[arg2]
+            pc = pc + 3
+
+        elseif opcode == 21 then -- PUSH
+            if sp < STACK_BOTTOM then
+                error("Stack overflow")
+            end
+            memory[sp] = registers[arg1]
+            sp = sp - 1
+            pc = pc + 3
+
+        elseif opcode == 22 then -- POP
+            if sp == STACK_TOP then
+                error("Stack underflow")
+            end
+            sp = sp + 1
+            registers[arg1] = memory[sp]
+            pc = pc + 3
+
+        elseif opcode == 23 then -- CALL
+            if sp < STACK_BOTTOM then
+                error("Stack overflow")
+            end
+            memory[sp] = pc + 3
+            sp = sp - 1
+            pc = arg1
+
+        elseif opcode == 24 then -- RET
+            if sp == STACK_TOP then
+                error("Stack underflow")
+            end
+            sp = sp + 1
+            pc = memory[sp]
 
         else
             print("\n\nCRITICAL ERROR!!!\nUnknown opcode " .. tostring(opcode) .. " at address " .. pc)

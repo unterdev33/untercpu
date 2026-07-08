@@ -1,4 +1,5 @@
 local build = {}
+local warned = false
 
 local opcode = {
     HALT = 1,
@@ -19,7 +20,12 @@ local opcode = {
     LOAD = 16,
     CMP = 17,
     DEBUG = 18,
-    PLOCATE = 19
+    PLOCATE = 19,
+    MOD = 20,
+    PUSH = 21,
+    POP = 22,
+    CALL = 23,
+    RET = 24
 }
 
 local function get_source_lines(path)
@@ -58,12 +64,9 @@ function build.run(input)
 
         for token in line:gmatch("%S+") do
 
-            if token == "PLOCATE" then
-                print("WARNING!\nPLOCATE is a debugging instruction. It is not part of the processor architecture and should not be used in release programs.")
-            end
-
-            if token == "DEBUG" then
-                print("WARNING!\n\nDEBUG is a debugging instruction. It is not part of the processor architecture and should not be used in release programs.")
+            if (token == "PLOCATE" or token == "DEBUG") and not warned then
+                print("WARNING!\nThis code uses debugging instructions. They are not part of the processor architecture and should not be used in release programs.")
+                warned = true
             end
 
             local value = opcode[token]
