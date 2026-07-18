@@ -101,7 +101,7 @@ function cpu.run(memory)
             pc = pc + 3
 
         elseif opcode == 12 then
-            registers[arg1] = registers[arg1] / registers[arg2] -- DIV
+            registers[arg1] = registers[arg1] // registers[arg2] -- DIV
             pc = pc + 3
 
         elseif opcode == 13 then -- JIP
@@ -123,8 +123,9 @@ function cpu.run(memory)
                 io.write(string.char(registers[arg1]))
             else
                 memory[arg2] = registers[arg1]
-                pc = pc + 3
             end
+
+            pc = pc + 3
 
         elseif opcode == 16 then -- LOAD
             if arg2 == 250 then
